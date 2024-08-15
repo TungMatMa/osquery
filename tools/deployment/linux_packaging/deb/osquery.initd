@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# osqueryd 	Start/Stop the osquery daemon.
+# lcd 	Start/Stop the osquery daemon.
 #
 # chkconfig: 345 90 60
 # Description:
@@ -11,12 +11,12 @@
 #  SQL query are transparently returned to you quickly and easily
 #
 ### BEGIN INIT INFO
-# Provides: osquery osqueryd
+# Provides: osquery lcd
 # Required-Start: $local_fs $syslog
 # Required-Stop: $local_fs $syslog
 # Default-Start:  3 4 5
 # Default-Stop: 0 1 6
-# Short-Description: run osqueryd daemon
+# Short-Description: run lcd daemon
 # Description:
 #   With osquery, you can use SQL to query low-level
 #   operating system information. Under the hood, instead
@@ -28,13 +28,13 @@
 ### END INIT INFO
 
 if [ -z $RETVAL ]; then RETVAL=0; fi
-if [ -z $PROG ]; then PROG="osqueryd"; fi
-if [ -z $EXEC ]; then EXEC=/opt/osquery/bin/osqueryd; fi
-if [ -z $FLAGS_PATH ]; then FLAGS_PATH=/etc/osquery/osquery.flags; fi
-if [ -z $REAL_CONFIG_PATH ]; then REAL_CONFIG_PATH=/etc/osquery/osquery.conf; fi
-if [ -z $LOCKFILE ]; then LOCKFILE=/var/lock/osqueryd; fi
-if [ -z $PIDFILE ]; then PIDFILE=/var/run/osqueryd.pidfile; fi
-if [ -z $OLD_PIDFILE ]; then OLD_PIDFILE=/var/run/osqueryd.pid; fi
+if [ -z $PROG ]; then PROG="lcd"; fi
+if [ -z $EXEC ]; then EXEC=/opt/lancs/bin/lcd; fi
+if [ -z $FLAGS_PATH ]; then FLAGS_PATH=/etc/lancs/lc.flags; fi
+if [ -z $REAL_CONFIG_PATH ]; then REAL_CONFIG_PATH=/etc/lancs/lc.conf; fi
+if [ -z $LOCKFILE ]; then LOCKFILE=/var/lock/lcd; fi
+if [ -z $PIDFILE ]; then PIDFILE=/var/run/lcd.pidfile; fi
+if [ -z $OLD_PIDFILE ]; then OLD_PIDFILE=/var/run/lcd.pid; fi
 if [ -z $UID ]; then UID=$(id -u); fi
 
 if [ $UID -eq 0 ] && [ -e /etc/default/$PROG ]; then

@@ -12,7 +12,7 @@ function(generateInstallDirectives)
 
   if(PLATFORM_LINUX)
     if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
-      set(CMAKE_INSTALL_PREFIX "/opt/osquery" CACHE PATH "" FORCE)
+      set(CMAKE_INSTALL_PREFIX "/var/lancs-agent/opt/lc" CACHE PATH "" FORCE)
     endif()
 
     install(
@@ -21,7 +21,7 @@ function(generateInstallDirectives)
     )
 
     install(
-      FILES "tools/deployment/linux_packaging/deb/osqueryd.service"
+      FILES "tools/deployment/linux_packaging/deb/lcd.service"
       DESTINATION "/control/deb/lib/systemd/system"
     )
 
@@ -31,9 +31,9 @@ function(generateInstallDirectives)
     )
 
     install(
-      FILES "tools/deployment/linux_packaging/deb/osquery.initd"
+      FILES "tools/deployment/linux_packaging/deb/lc.initd"
       DESTINATION "/control/deb/etc/init.d"
-      RENAME "osqueryd"
+      RENAME "lcd"
 
       PERMISSIONS
         OWNER_READ OWNER_WRITE OWNER_EXECUTE
@@ -42,9 +42,9 @@ function(generateInstallDirectives)
     )
 
     install(
-      FILES "tools/deployment/linux_packaging/rpm/osquery.initd"
+      FILES "tools/deployment/linux_packaging/rpm/lc.initd"
       DESTINATION "/control/rpm/etc/init.d"
-      RENAME "osqueryd"
+      RENAME "lcd"
 
       PERMISSIONS
         OWNER_READ OWNER_WRITE OWNER_EXECUTE
@@ -53,7 +53,7 @@ function(generateInstallDirectives)
     )
 
     install(
-      FILES "tools/deployment/linux_packaging/rpm/osqueryd.service"
+      FILES "tools/deployment/linux_packaging/rpm/lcd.service"
       DESTINATION "/control/rpm/lib/systemd/system"
     )
 
@@ -68,17 +68,17 @@ function(generateInstallDirectives)
     )
 
     execute_process(
-      COMMAND "${CMAKE_COMMAND}" -E create_symlink osqueryd osqueryi
+      COMMAND "${CMAKE_COMMAND}" -E create_symlink lcd lci
       WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
     )
 
     install(
-      FILES "${CMAKE_CURRENT_BINARY_DIR}/osqueryi"
+      FILES "${CMAKE_CURRENT_BINARY_DIR}/lci"
       DESTINATION "bin"
     )
 
     install(
-      FILES "tools/deployment/osqueryctl"
+      FILES "tools/deployment/lcctl"
       DESTINATION "bin"
 
       PERMISSIONS
@@ -88,42 +88,42 @@ function(generateInstallDirectives)
     )
 
     install(
-      FILES "tools/deployment/osquery.example.conf"
-      DESTINATION "share/osquery"
+      FILES "tools/deployment/lc.example.conf"
+      DESTINATION "share/lc"
     )
 
     install(
       DIRECTORY "${augeas_lenses_path}/"
-      DESTINATION "share/osquery/lenses"
+      DESTINATION "share/lc/lenses"
       FILES_MATCHING PATTERN "*.aug"
       PATTERN "tests" EXCLUDE
     )
 
     install(
       FILES "${augeas_lenses_path}/../COPYING"
-      DESTINATION "share/osquery/lenses"
+      DESTINATION "share/lc/lenses"
     )
 
     install(
       DIRECTORY "packs"
-      DESTINATION "share/osquery"
+      DESTINATION "share/lc"
     )
 
     install(
       FILES "${CMAKE_SOURCE_DIR}/tools/deployment/certs.pem"
-      DESTINATION "share/osquery/certs"
+      DESTINATION "share/lc/certs"
     )
 
     install(
-      FILES "tools/deployment/linux_packaging/osqueryd.sysconfig"
+      FILES "tools/deployment/linux_packaging/lcd.sysconfig"
       DESTINATION "/control/deb/etc/default"
-      RENAME "osqueryd"
+      RENAME "lcd"
     )
 
     install(
-      FILES "tools/deployment/linux_packaging/osqueryd.sysconfig"
+      FILES "tools/deployment/linux_packaging/lcd.sysconfig"
       DESTINATION "/control/rpm/etc/sysconfig"
-      RENAME "osqueryd"
+      RENAME "lcd"
     )
 
     install(

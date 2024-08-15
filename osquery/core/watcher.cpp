@@ -418,7 +418,7 @@ bool WatcherRunner::watch(const PlatformProcess& child) const {
       // Since the watchdog cannot use the logger plugin the error message
       // should be logged to stderr and to the system log.
       std::stringstream error;
-      error << "osqueryd worker (" << child.pid()
+      error << "lcd worker (" << child.pid()
             << ") stopping: " << status.getMessage();
       systemLog(error.str());
       LOG(WARNING) << error.str();
@@ -459,7 +459,7 @@ void WatcherRunner::stopChild(const PlatformProcess& child, bool force) const {
       return;
     }
 
-    LOG(WARNING) << "osqueryd worker (" << std::to_string(child_pid)
+    LOG(WARNING) << "lcd worker (" << std::to_string(child_pid)
                  << ") could not be stopped. Sending kill signal.";
   }
 
@@ -662,7 +662,7 @@ void WatcherRunner::createWorker() {
   if (watcher_->getState(watcher_->getWorker()).last_respawn_time >
       getUnixTime() - getWorkerLimit(WatchdogLimitType::RESPAWN_LIMIT)) {
     watcher_->workerRestarted();
-    LOG(WARNING) << "osqueryd worker respawning too quickly: "
+    LOG(WARNING) << "lcd worker respawning too quickly: "
                  << watcher_->workerRestartCount() << " times";
 
     // The configured automatic delay.
@@ -695,14 +695,14 @@ void WatcherRunner::createWorker() {
   boost::system::error_code ec;
   auto exec_path = fs::system_complete(fs::path(qd[0]["path"]), ec);
   if (!pathExists(exec_path).ok()) {
-    LOG(WARNING) << "osqueryd doesn't exist in: " << exec_path.string();
+    LOG(WARNING) << "lcd doesn't exist in: " << exec_path.string();
     return;
   }
   if (!safePermissions(
           exec_path.parent_path().string(), exec_path.string(), true)) {
     // osqueryd binary has become unsafe.
     auto message = std::string(RLOG(1382)) +
-                   "osqueryd has unsafe permissions: " + exec_path.string();
+                   "lcd has unsafe permissions: " + exec_path.string();
     requestShutdown(EXIT_FAILURE, message);
     return;
   }
@@ -710,14 +710,14 @@ void WatcherRunner::createWorker() {
   auto worker = PlatformProcess::launchWorker(exec_path.string(), argc_, argv_);
   if (worker == nullptr) {
     // Unrecoverable error, cannot create a worker process.
-    LOG(ERROR) << "osqueryd could not create a worker process";
+    LOG(ERROR) << "lcd could not create a worker process";
     requestShutdown(EXIT_FAILURE);
     return;
   }
 
   watcher_->setWorker(worker);
   watcher_->resetWorkerCounters(getUnixTime());
-  VLOG(1) << "osqueryd watcher (" << PlatformProcess::getCurrentPid()
+  VLOG(1) << "lcd watcher (" << PlatformProcess::getCurrentPid()
           << ") executing worker (" << worker->pid() << ")";
   watcher_->worker_status_ = -1;
 }
@@ -777,7 +777,7 @@ void WatcherWatcherRunner::start() {
   while (!interrupted()) {
     if (isLauncherProcessDead(*watcher_)) {
       // Watcher died, the worker must follow.
-      VLOG(1) << "osqueryd worker (" << PlatformProcess::getCurrentPid()
+      VLOG(1) << "lcd worker (" << PlatformProcess::getCurrentPid()
               << ") detected killed watcher (" << watcher_->pid() << ")";
       // The watcher watcher is a thread. Do not join services after removing.
       requestShutdown();

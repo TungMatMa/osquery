@@ -60,7 +60,7 @@ start() {
     cp $PLIST_INSTALLATION_PATH $PLIST_PATH
     launchctl load $PLIST_PATH
   else
-    exec_with_env "service osqueryd start"
+    exec_with_env "service lcd start"
   fi
 }
 
@@ -69,7 +69,7 @@ stop() {
     launchctl unload $PLIST_PATH
     rm $PLIST_PATH
   else
-    exec_with_env "service osqueryd stop"
+    exec_with_env "service lcd stop"
   fi
 }
 
@@ -86,7 +86,7 @@ status() {
       echo "$PLIST_DOMAIN is running. pid: $LAUNCHCTL_LIST_PID"
     fi
   else
-    exec_with_env "service osqueryd status"
+    exec_with_env "service lcd status"
   fi
 }
 
@@ -118,23 +118,23 @@ main() {
     LAUNCHCTL_LIST=`launchctl list | grep io.osquery.agent || true`
     LAUNCHCTL_LIST_PID=`echo $LAUNCHCTL_LIST | awk '{ print $1 }'`
   else
-    INIT_SCRIPT_PATH="/etc/init.d/osqueryd"
-    SERVICE_SCRIPT_PATH="/usr/lib/systemd/system/osqueryd.service"
+    INIT_SCRIPT_PATH="/etc/init.d/lcd"
+    SERVICE_SCRIPT_PATH="/usr/lib/systemd/system/lcd.service"
     if [[ ! -e "$INIT_SCRIPT_PATH" && ! -f "$SERVICE_SCRIPT_PATH" ]]; then
       echo "Cannot find the init.d script at $INIT_SCRIPT_PATH"
       echo "Additionally, no systemd service at $SERVICE_SCRIPT_PATH"
       exit 6
     fi
 
-    REAL_CONFIG_PATH="/etc/osquery/osquery.conf"
-    EXAMPLE_CONFIG_PATH="/opt/osquery/share/osquery/osquery.example.conf"
-    PIDFILE="/var/run/osquery.pid"
-    LOCKFILE="/var/lock/subsys/osqueryd"
-    EXEC="/opt/osquery/bin/osqueryd"
+    REAL_CONFIG_PATH="/var/lancs-agent/etc/lc/lcd.conf"
+    EXAMPLE_CONFIG_PATH="/var/lancs-agent/opt/lc/share/lc/lcd.conf"
+    PIDFILE="var/lancs-agent/var/run/lcd.pid"
+    LOCKFILE="/var/lancs-agent/var/lock/subsys/lcd"
+    EXEC="/var/lancs-agent/opt/lcd/bin/lcd"
   fi
 
-  OSQUERY_DB="/var/osquery/osquery.db"
-  PROG="osqueryd"
+  OSQUERY_DB="/var/lancs-agent/var/lc/osquery.db"
+  PROG="lcd"
 
   case "$1" in
     clean)

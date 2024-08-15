@@ -31,9 +31,9 @@ DECLARE_string(flagfile);
 
 namespace osquery {
 
-static const std::string kDefaultFlagsFile{OSQUERY_HOME "osquery.flags"};
-static const std::string kServiceName{"osqueryd"};
-static const std::string kServiceDisplayName{"osquery daemon service"};
+static const std::string kDefaultFlagsFile{OSQUERY_HOME "lc.flags"};
+static const std::string kServiceName{"lcd"};
+static const std::string kServiceDisplayName{"lc daemon service"};
 
 static SERVICE_STATUS_HANDLE kStatusHandle = nullptr;
 static SERVICE_STATUS kServiceStatus = {0};
@@ -44,7 +44,7 @@ const unsigned long kServiceShutdownWait{100};
 #define SLOG(s) ::osquery::DebugPrintf(s)
 
 void DebugPrintf(const std::string& s) {
-  auto dbgString = "[osqueryd] " + s;
+  auto dbgString = "[lcd] " + s;
   if (IsDebuggerPresent()) {
     ::OutputDebugStringA(dbgString.c_str());
   }
@@ -177,7 +177,7 @@ static void setupServiceRecovery(SC_HANDLE schService) {
   }
 }
 
-/// Install osqueryd as a service given the path to the binary
+/// Install lancs_collector as a service given the path to the binary
 Status installService(const std::string& binPath) {
   SC_HANDLE schSCManager = OpenSCManager(
       nullptr, nullptr, SC_MANAGER_CONNECT | SC_MANAGER_CREATE_SERVICE);

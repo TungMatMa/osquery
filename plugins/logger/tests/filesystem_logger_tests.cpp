@@ -49,7 +49,7 @@ class FilesystemLoggerTests : public testing::Test {
     fs::create_directories(FLAGS_logger_path);
 
     // Set the expected results path.
-    results_path_ = (logger_path / "osqueryd.results.log").string();
+    results_path_ = (logger_path / "lc.log").string();
 
     FLAGS_disable_logging = false;
 
@@ -110,12 +110,12 @@ TEST_F(FilesystemLoggerTests, test_log_status) {
     return;
   }
 
-  initStatusLogger("osqueryd");
-  initLogger("osqueryd");
+  initStatusLogger("lcd");
+  initLogger("lcd");
 
   LOG(WARNING) << "Filesystem logger test is generating a warning status (1/3)";
 
-  auto status_path = fs::path(FLAGS_logger_path) / "osqueryd.INFO";
+  auto status_path = fs::path(FLAGS_logger_path) / "lc.INFO";
   EXPECT_TRUE(osquery::pathExists(status_path));
 
   std::string content;
@@ -158,7 +158,7 @@ TEST_F(FilesystemLoggerTests, test_log_snapshot) {
   item.counter = 0L;
 
   EXPECT_TRUE(logSnapshotQuery(item));
-  auto snapshot_path = fs::path(FLAGS_logger_path) / "osqueryd.snapshots.log";
+  auto snapshot_path = fs::path(FLAGS_logger_path) / "lc.log";
   ASSERT_TRUE(fs::exists(snapshot_path));
 
   // Write a second snapshot item, and make sure there is a newline between

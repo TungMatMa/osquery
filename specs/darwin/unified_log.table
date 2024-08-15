@@ -25,8 +25,8 @@ schema([
 ])
 examples([
   "select * from unified_log",
-  "select * from unified_log where process = 'osqueryd'",
-  "select * from unified_log where predicate = 'process = \"osqueryd\" OR process = \"Santa\"'",
+  "select * from unified_log where process = 'lcd'",
+  "select * from unified_log where predicate = 'process = \"lcd\" OR process = \"Santa\"'",
   "select * from unified_log where predicate = 'processImagePath = \"/opt/osquery/lib/osquery.app/Contents/MacOS/osqueryd\"'",
   "select * from unified_log where max_rows = 1234",
   "select * from unified_log where timestamp > -1",

@@ -7,20 +7,20 @@ Each osquery tag (stable release) is published to **yum** and **apt** repositori
 The default packages create the following structure:
 
 ```sh
-/etc/init.d/osqueryd
-/etc/osquery/
-/etc/sysconfig/osqueryd
-/opt/osquery/bin/osqueryctl
-/opt/osquery/bin/osqueryd
-/usr/local/bin/osqueryi -> /opt/osquery/bin/osqueryd
-/usr/local/bin/osqueryctl -> /opt/osquery/bin/osqueryctl
-/usr/lib/systemd/system/osqueryd.service
-/opt/osquery/share/osquery/certs/certs.pem
-/opt/osquery/share/osquery/lenses/{*}.aug
-/opt/osquery/share/osquery/packs/{*}.conf
-/opt/osquery/share/osquery/osquery.example.conf
-/var/log/osquery/
-/var/osquery/
+/etc/init.d/lcd
+/etc/lancs/
+/etc/sysconfig/lcd
+/opt/lancs/bin/lcctl
+/opt/lancs/bin/lc
+/usr/local/bin/lci -> /opt/lancs/bin/lcd
+/usr/local/bin/lcctl -> /opt/lancs/bin/lcctl
+/usr/lib/systemd/system/lcd.service
+/opt/lancs/share/lancs/certs/certs.pem
+/opt/lancs/share/lancs/lenses/{*}.aug
+/opt/lancs/share/lancs/packs/{*}.conf
+/opt/lancs/share/lancs/lancs.example.conf
+/var/log/lancs/
+/var/lancs/
 ```
 
 ## Installing osquery
@@ -36,9 +36,9 @@ To start a standalone osquery use: `osqueryi`. This does not need an osquery ser
 After exploring the rest of the documentation you should understand the basics of configuration and logging. These and most other concepts apply to `osqueryd`, the daemon, too. To start the daemon:
 
 ```sh
-sudo cp /opt/osquery/share/osquery/osquery.example.conf /etc/osquery/osquery.conf
-# sudo service osqueryd start
-sudo systemctl start osqueryd
+sudo cp /opt/lancs/share/lancs/lancs.example.conf /etc/lancs/lancs.conf
+# sudo service lcd start
+sudo systemctl start lcd
 ```
 
 > NOTICE: The interactive shell and daemon do NOT communicate!

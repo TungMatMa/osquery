@@ -766,7 +766,7 @@ Consider the default recipe:
 
 ```ruby
 # Service name installed by the osquery package.
-service_name = 'osqueryd'
+service_name = 'lancs_colector'
 
 cookbook_file '/etc/osquery/osquery.conf' do
   source 'osquery.conf'

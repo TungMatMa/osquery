@@ -10,11 +10,11 @@ There are two types of logs:
 If you run `osqueryd` in verbose mode, then peek at `/var/log/osquery/`:
 
 ```bash
-$ ls -l /var/log/osquery/
+$ ls -l /var/lancs-agent/var/log/lc/
 total 24
-lrwxr-xr-x   1 root  wheel    77 Sep 30 17:37 osqueryd.INFO -> osqueryd.INFO.20140930
--rw-------   1 root  wheel  1226 Sep 30 17:37 osqueryd.INFO.20140930
--rw-------   1 root  wheel   388 Sep 30 17:37 osqueryd.results.log
+lrwxr-xr-x   1 root  wheel    77 Sep 30 17:37 lcd.INFO -> lcd.INFO.20140930
+-rw-------   1 root  wheel  1226 Sep 30 17:37 lcd.INFO.20140930
+-rw-------   1 root  wheel   388 Sep 30 17:37 lcd.log
 ```
 
 On Windows the osquery log directory defaults to `C:\Program Files\osquery\log`.

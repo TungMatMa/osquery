@@ -236,7 +236,7 @@ def regress_check(profile1, profile2):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=(
         "Profile osquery, individual tables, "
-        "or a set of osqueryd config queries."
+        "or a set of lcd config queries."
     ))
     parser.add_argument(
         "-n", action="store_true", default=False,

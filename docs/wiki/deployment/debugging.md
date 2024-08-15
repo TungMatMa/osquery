@@ -26,15 +26,15 @@ To see the daemon's verbose messages you'll need to run it in the foreground, se
 The daemon has some restrictions that make verbose debugging difficult, let's walk through how to run it in the foreground.
 
 ```shell
-osqueryd --ephemeral --disable_database --disable_logging
+lcd --ephemeral --disable_database --disable_logging
 ```
 
 The `ephemeral` flag tells the daemon that it may co-exist with other persistent daemons. The `disable_database` must be present or `database_path` must be overridden as the default database location is not writable/readable by a non-privileged user. The same applies for `disable_logging`, and if you use the default logger plugin `filesystem` then alternatively `--logger_path` may be overridden. Now we can append `--verbose`:
 
 ```shell
-$ osqueryd --ephemeral --disable_database --disable_logging --verbose
+$ lcd --ephemeral --disable_database --disable_logging --verbose
 I0412 08:03:59.664191 3056837568 init.cpp:380] osquery initialized [version=2.4.0]
-I0412 08:03:59.666533 196194304 watcher.cpp:465] osqueryd watcher (35549) executing worker (35550)
+I0412 08:03:59.666533 196194304 watcher.cpp:465] lcd watcher (35549) executing worker (35550)
 I0412 08:03:59.688765 3056837568 init.cpp:377] osquery worker initialized [watcher=35549]
 I0412 08:03:59.690062 3056837568 rocksdb.cpp:205] Opening RocksDB handle: /tmp/osquery.db
 ```
@@ -84,8 +84,8 @@ This line is created when a worker starts and finds a 'dirty bit' toggled for th
 Lines that indicate the watchdog has taken action include either of the following:
 
 ```text
-osqueryd worker (92234) system performance limits exceeded
-osqueryd worker (8368) memory limits exceeded: 99573760
+lcd worker (92234) system performance limits exceeded
+lcd worker (8368) memory limits exceeded: 99573760
 ```
 
 The pid of the offending worker is included in parenthesis.
@@ -93,7 +93,7 @@ The pid of the offending worker is included in parenthesis.
 If the worker finds itself in a re-occurring error state or the watchdog continues to stop the worker, additional lines like the following are created:
 
 ```text
-osqueryd worker respawning too quickly: 1 times
+lcd worker respawning too quickly: 1 times
 ```
 
 The watchdog implements an exponential backoff when respawning workers and the associated 'dirty' query is denylisted from running for 24 hours.

@@ -21,7 +21,7 @@ param(
   [string] $welManifestPath = (Join-Path $PSScriptRoot "osquery.man")
 )
 
-$kServiceName = "osqueryd"
+$kServiceName = "lcd"
 $kServiceDescription = "osquery daemon service"
 $kServiceBinaryPath = Resolve-Path ([System.IO.Path]::Combine($PSScriptRoot, '..', 'osquery', 'osqueryd', 'osqueryd.exe'))
 
