@@ -1,0 +1,4 @@
+FLAG_FILE="/var/lancs-agent/etc/lc/lc.flags"
+CONFIG_FILE="/var/lancs-agent/etc/lc/lc.conf"
+LOCAL_PIDFILE="/var/lancs-agent/var/lc/lcd.pidfile"
+PIDFILE="/var/lancs-agent/var/run/lcd.pidfile"

@@ -41,10 +41,10 @@ function(generateOsqueryd)
   set(source_file "${CMAKE_CURRENT_BINARY_DIR}/empty_osqueryd_target_source_file.cpp")
   generateBuildTimeSourceFile(${source_file} "extern int main(int argc, char* argv[]);")
 
-  add_osquery_executable(osqueryd "${source_file}")
-  set_target_properties(osqueryd PROPERTIES POSITION_INDEPENDENT_CODE true)
+  add_osquery_executable(lcd "${source_file}")
+  set_target_properties(lcd PROPERTIES POSITION_INDEPENDENT_CODE true)
 
-  target_link_libraries(osqueryd PRIVATE
+  target_link_libraries(lcd PRIVATE
     osquery_cxx_settings
     osquery_main
   )
@@ -54,16 +54,16 @@ function(generateOsqueryd)
     set(osquery_ext ".exe")
   endif()
 
-  add_custom_target(create_osqueryi ALL DEPENDS osqueryi${osquery_ext})
-  add_custom_command(OUTPUT osqueryi${osquery_ext}
-    COMMAND "${CMAKE_COMMAND}" -E create_symlink osqueryd${osquery_ext} osqueryi${osquery_ext}
-    WORKING_DIRECTORY "$<TARGET_FILE_DIR:osqueryd>"
+  add_custom_target(create_lci ALL DEPENDS lci${osquery_ext})
+  add_custom_command(OUTPUT lci${osquery_ext}
+    COMMAND "${CMAKE_COMMAND}" -E create_symlink lcd${osquery_ext} osqueryi${osquery_ext}
+    WORKING_DIRECTORY "$<TARGET_FILE_DIR:lcd>"
   )
-  add_dependencies(create_osqueryi osqueryd)
+  add_dependencies(create_lci lcd)
 endfunction()
 
 function(enableOsqueryWEL)
-  target_sources(osqueryd PRIVATE "${TOOLS_WEL_FILES_ROOT_DIR}/windows_resources.rc")
+  target_sources(lcd PRIVATE "${TOOLS_WEL_FILES_ROOT_DIR}/windows_resources.rc")
 endfunction()
 
 osqueryMain()

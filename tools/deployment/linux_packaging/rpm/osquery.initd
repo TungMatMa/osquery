@@ -33,8 +33,8 @@ if [ -z $EXEC ]; then EXEC=/opt/lancs/bin/lcd; fi
 if [ -z $FLAGS_PATH ]; then FLAGS_PATH=/etc/lancs/lc.flags; fi
 if [ -z $REAL_CONFIG_PATH ]; then REAL_CONFIG_PATH=/etc/lancs/lc.conf; fi
 if [ -z $LOCKFILE ]; then LOCKFILE=/var/lock/lcd; fi
-if [ -z $PIDFILE ]; then PIDFILE=/var/run/lcd.pidfile; fi
-if [ -z $OLD_PIDFILE ]; then OLD_PIDFILE=/var/run/lcd.pid; fi
+if [ -z $PIDFILE ]; then PIDFILE=/var/lancs-agent/var/run/lcd.pidfile; fi
+if [ -z $OLD_PIDFILE ]; then OLD_PIDFILE=/var/lancs-agent/var/run/lcd.pid; fi
 if [ -z $UID ]; then UID=$(id -u); fi
 
 if [ $UID -eq 0 ] && [ -e /etc/sysconfig/$PROG ]; then

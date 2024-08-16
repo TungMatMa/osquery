@@ -23,7 +23,7 @@ osquery> SELECT * FROM osquery_flags WHERE default_value <> value;
 
 A special flag, part of Google Flags, can be used to read additional flags from a line-delimited file. On macOS and Linux this `--flagfile` is the recommended way to add/remove the following CLI-only initialization flags.
 
-`--flagfile /etc/osquery/osquery.flags`
+`--flagfile /var/lancs-agent/etc/lc/lc.flags`
 
 Include line-delimited switches to be interpreted and used as CLI-flags:
 
@@ -46,7 +46,7 @@ Config plugin name. The type of configuration retrieval, the default **filesyste
 
 Built-in options include: **filesystem**, **tls**
 
-`--config_path=/etc/osquery/osquery.conf`
+`--config_path=/var/lancs-agent/etc/lc/lc.conf`
 
 The **filesystem** config plugin's path to a JSON file.
 On macOS the default path is `/var/osquery/osquery.conf`.
@@ -74,7 +74,7 @@ Request that the configuration JSON be printed to standard out before it is upda
 
 Force `osqueryd` to kill previously-running daemons. The daemon will check for an existing "pidfile". If found, and if it contains a pid of a process named "osqueryd", the process will be killed.
 
-`--pidfile=/var/osquery/osqueryd.pidfile`
+`--pidfile=/var/lancs-agent/var/lc/lcd.pidfile`
 
 Path to the daemon pidfile mutex. The file is used to prevent multiple osqueryd processes starting.
 
@@ -479,7 +479,7 @@ The minimum level for status logs written to stderr. Use the following values: `
 
 The default behavior is to also write status logs to stderr. Set this flag to false to disable writing (copying) status logs to stderr. In this case `--verbose` is respected.
 
-`--logger_path=/var/log/osquery/`
+`--logger_path=/var/lancs-agent/var/`
 
 Directory path for `ERROR`/`WARN`/`INFO` and query result logging by the **filesystem** plugin.
 

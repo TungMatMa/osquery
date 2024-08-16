@@ -13,7 +13,7 @@ cmake_minimum_required(VERSION 3.21.4 FATAL_ERROR)
 include(cmake/utilities.cmake)
 include(cmake/toolchain.cmake)
 
-project(osquery)
+project(Lancs-collector)
 
 if(OSQUERY_BUILD_TESTS)
   enable_testing()

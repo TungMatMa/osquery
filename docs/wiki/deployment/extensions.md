@@ -57,7 +57,7 @@ The same dependency check is applied to the logger plugin setting after a valid 
 Extensions can also be loaded individually on the osquery command line, for example:
 
 ```sh
-osqueryi --extension /path/to/your_extension.ext
+lci --extension /path/to/your_extension.ext
 ```
 
 ## More Options
@@ -65,7 +65,7 @@ osqueryi --extension /path/to/your_extension.ext
 Extensions are most useful when used to expose config or logger plugins. Along with auto-loading extensions, you can start daemon services with non-default plugins using `--flagfile=PATH`. The `osqueryd` initscript or SystemV service on Linux searches for a `/etc/osquery/osquery.flags` path containing flags. This is a great place to add non-default extensions options or for replacing plugins:
 
 ```sh
-$ cat /etc/osquery/osquery.flags
+$ cat /var/lancs-agent/etc/lc/lc.flags
 --config_plugin=custom_plugin
 --logger_plugin=scribe
 ```
